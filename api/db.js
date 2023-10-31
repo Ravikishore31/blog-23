@@ -8,7 +8,8 @@ function createDBConnection() {
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
   });
-
+  
+  
   // Handle MySQL connection errors
   db.on("error", (err) => {
     if (err.code === "PROTOCOL_CONNECTION_LOST") {
