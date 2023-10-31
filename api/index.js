@@ -4,11 +4,16 @@ import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
 import cookieParser from "cookie-parser";
 import multer from "multer";
+import cors from "cors"; // Import the cors middleware
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+
+// Enable CORS for all routes
+app.use(cors());
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "../client/public/upload");
