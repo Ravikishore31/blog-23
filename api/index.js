@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "blog-23-cipcase5t-ravikishore31.vercel.app",
+    origin: "*",
     credentials: true,
   })
 );
