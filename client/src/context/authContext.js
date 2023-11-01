@@ -9,14 +9,14 @@ export const AuthContextProvider = ({ children }) => {
   );
   const login = async (inputs) => {
     const res = await axios.post(
-      "https://blog-23-3a2h.onrender.com/api/auth/login",
+      "https://blog-23-igjtrnnb8-ravikishore31.vercel.app/api/auth/login",
       inputs,
       { withCredentials: true }
     );
     setCurrentUser(res.data);
   };
   const logout = async (inputs) => {
-    await axios.post("https://blog-23-3a2h.onrender.com/api/auth/logout");
+    await axios.post("https://blog-23-igjtrnnb8-ravikishore31.vercel.app/api/auth/logout");
     setCurrentUser(null);
   };
 

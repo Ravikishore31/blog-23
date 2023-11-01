@@ -23,7 +23,7 @@ const Single = () => {
     const fetchData = async () => {
       try {
         const res = await axios.get(
-          `https://blog-23-3a2h.onrender.com/api/posts/${postId}`
+          `https://blog-23-igjtrnnb8-ravikishore31.vercel.app/api/posts/${postId}`
         );
         setPost(res.data);
       } catch (err) {
@@ -35,7 +35,7 @@ const Single = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://blog-23-3a2h.onrender.com/api/posts/${postId}`);
+      await axios.delete(`https://blog-23-igjtrnnb8-ravikishore31.vercel.app/api/posts/${postId}`);
       navigate("/");
     } catch (err) {
       console.log(err);

@@ -21,7 +21,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post("https://blog-23-3a2h.onrender.com/api/auth/register", inputs, {
+      await axios.post("https://blog-23-igjtrnnb8-ravikishore31.vercel.app/api/auth/register", inputs, {
         withCredentials: true,
       });
       navigate("/login");

@@ -14,7 +14,7 @@ const Home = () => {
     const fetchData = async () => {
       try {
         if (user.currentUser != null) {
-          const res = await axios.get(`https://blog-23-3a2h.onrender.com/api/posts${cat}`);
+          const res = await axios.get(`https://blog-23-igjtrnnb8-ravikishore31.vercel.app/api/posts${cat}`);
           setPosts(res.data);
         }
       } catch (err) {
