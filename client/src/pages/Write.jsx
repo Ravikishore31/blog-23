@@ -19,7 +19,7 @@ const Write = () => {
       const formData = new FormData();
       formData.append("file", file);
       const res = await axios.post(
-        "https://blog-23-igjtrnnb8-ravikishore31.vercel.app/api/upload",
+        "https://blog-23-3a2h.onrender.com/api/upload",
         formData
       );
       return res.data;
@@ -35,7 +35,7 @@ const Write = () => {
     try {
       if (state) {
         await axios.put(
-          `https://blog-23-igjtrnnb8-ravikishore31.vercel.app/api/posts/${state.id}`,
+          `https://blog-23-3a2h.onrender.com/api/posts/${state.id}`,
           {
             title,
             desc: value,
@@ -48,7 +48,7 @@ const Write = () => {
         );
       } else {
         await axios.post(
-          "https://blog-23-igjtrnnb8-ravikishore31.vercel.app/api/posts",
+          "https://blog-23-3a2h.onrender.com/api/posts",
           {
             title,
             desc: value,
