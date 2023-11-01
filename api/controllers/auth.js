@@ -24,6 +24,7 @@ export const register = (req, res) => {
 
 export const login = (req, res) => {
   const q = "SELECT * FROM users WHERE username=?";
+
   db.query(q, [req.body.username], (err, data) => {
     if (err) return res.json(err);
     if (data.length === 0) return res.status(404).json("User not found");
@@ -37,13 +38,15 @@ export const login = (req, res) => {
       return res.status(400).json("Wrong username or password");
 
     const token = jwt.sign({ id: data[0].id }, "jwtkey");
+    const { password, ...other } = data[0];
 
-    // Set secure cookies and enable httpsOnly
-    res.cookie("access_token", token, {
-      secure: true, // Ensure this is set to true for HTTPS
-      httpOnly: true,
-      sameSite: "none", // Use 'none' when serving cross-origin cookies in a secure context (e.g., when using HTTPS)
-    }).status(200).json({ id: data[0].id });
+    res
+      .cookie("access_token", token, {
+        httpsOnly: true,
+        secure: true,
+      })
+      .status(200)
+      .json(other);
   });
 };
 
