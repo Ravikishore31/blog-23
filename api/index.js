@@ -4,16 +4,18 @@ import userRoutes from "./routes/users.js";
 import postRoutes from "./routes/posts.js";
 import cookieParser from "cookie-parser";
 import multer from "multer";
-import cors from "cors"; // Import the cors middleware
+import cors from "cors";
 
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-
-// Enable CORS for all routes
-app.use(cors());
-
+app.use(
+  cors({
+    origin: "https://vermillion-kringle-0e2586.netlify.app",
+    credentials: true,
+  })
+);
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "../client/public/upload");

@@ -18,7 +18,10 @@ const Write = () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("/upload", formData);
+      const res = await axios.post(
+        "https://blog-23-3a2h.onrender.com/api/upload",
+        formData
+      );
       return res.data;
     } catch (err) {
       console.log(err);
@@ -30,20 +33,34 @@ const Write = () => {
     const imgUrl = await upload();
 
     try {
-      state
-        ? await axios.put(`/posts/${state.id}`, {
+      if (state) {
+        await axios.put(
+          `https://blog-23-3a2h.onrender.com/api/posts/${state.id}`,
+          {
             title,
             desc: value,
             cat,
             img: file ? imgUrl : "",
-          })
-        : await axios.post(`/posts/`, {
+          },
+          {
+            withCredentials: true, // Send cookies along with the request
+          }
+        );
+      } else {
+        await axios.post(
+          "https://blog-23-3a2h.onrender.com/api/posts",
+          {
             title,
             desc: value,
             cat,
             img: file ? imgUrl : "",
-            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-          });
+            date: moment().format("YYYY-MM-DD HH:mm:ss"),
+          },
+          {
+            withCredentials: true, // Send cookies along with the request
+          }
+        );
+      }
       navigate("/");
     } catch (err) {
       console.log(err);

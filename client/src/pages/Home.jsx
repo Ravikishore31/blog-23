@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import { useContext } from "react";
+import { AuthContext } from "../context/authContext";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true); // Add loading state
-
   const cat = useLocation().search;
+
+  const user = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/posts${cat}`);
-        setPosts(res.data);
-        setLoading(false); // Set loading to false when data is fetched
+        if (user.currentUser != null) {
+          const res = await axios.get(`https://blog-23-3a2h.onrender.com/api/posts${cat}`);
+          setPosts(res.data);
+        }
       } catch (err) {
         console.log(err);
-        setLoading(false); // Set loading to false in case of an error
       }
     };
     fetchData();
-  }, [cat]);
+  }, [cat, user]);
 
   const getText = (html) => {
     const doc = new DOMParser().parseFromString(html, "text/html");
@@ -29,14 +31,14 @@ const Home = () => {
 
   return (
     <div className="home">
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="posts">
-          {posts.map((post) => (
+      <div className="posts">
+        {user.currentUser == null ? (
+          <p>No posts available. Please login to view posts.</p>
+        ) : (
+          posts.map((post) => (
             <div className="post" key={post.id}>
               <div className="img">
-                <img src={`/upload/${post.img}`} alt="" /> {/* Correct image source path */}
+                <img src={`./public/upload/${post.img}`} alt="" />
               </div>
               <div className="content">
                 <Link className="link" to={`/post/${post.id}`}>
@@ -46,9 +48,9 @@ const Home = () => {
                 <button>Read More</button>
               </div>
             </div>
-          ))}
-        </div>
-      )}
+          ))
+        )}
+      </div>
     </div>
   );
 };

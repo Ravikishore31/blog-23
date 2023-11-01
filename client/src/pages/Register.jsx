@@ -21,10 +21,18 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post("/auth/register", inputs);
+      await axios.post("https://blog-23-3a2h.onrender.com/api/auth/register", inputs, {
+        withCredentials: true,
+      });
       navigate("/login");
     } catch (err) {
-      setError(err.response.data);
+      if (err.response) {
+        setError(err.response.data);
+      } else {
+        // Handle other types of errors (e.g., network errors)
+        console.error("An error occurred:", err);
+        setError("An error occurred. Please try again.");
+      }
     }
   };
   return (

@@ -42,6 +42,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "https://blog-23-3a2h.onrender.com/api/"
+  }
 }
