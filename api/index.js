@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "*",
+    origin: "https://vermillion-kringle-0e2586.netlify.app",
     credentials: true,
   })
 );
